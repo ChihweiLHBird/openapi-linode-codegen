@@ -1,0 +1,10 @@
+### Missing Properties
+
+1. Path: `paths/lke/clusters/{clusterId}/pools/post/requestBody`
+2. Path: `paths/networking/firewalls/{firewallId}/devices/post/requestBody`
+
+Warnings: 
+        - Unused model: PaymentRequest
+        - Unused model: SecurityQuestion
+
+'#/components/schemas/LinodeConfigInterfaceID'

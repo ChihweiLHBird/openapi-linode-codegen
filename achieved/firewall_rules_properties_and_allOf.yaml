@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  version: 4.176.0
+  title: Linode API
+servers:
+- url: https://api.linode.com/v4
+paths:
+  /networking/firewalls/{firewallId}/rules:
+    parameters:
+      - name: firewallId
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      tags:
+      - Networking
+      summary: Firewall Rules Update
+      operationId: updateFirewallRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Firewall/properties/rules'
+              type: object
+              properties:
+                inbound:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FirewallRuleConfig'
+                outbound:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FirewallRuleConfig'
+      responses:
+        '200':
+          description: Firewall Rules updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Firewall/properties/rules'
+components:
+  schemas:
+    Firewall:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        rules:
+          type: object
+          properties:
+            inbound:
+              type: array
+              items:
+                $ref: '#/components/schemas/FirewallRuleConfig'
+            outbound:
+              type: array
+              items:
+                $ref: '#/components/schemas/FirewallRuleConfig'
+    FirewallRuleConfig:
+      type: object
+      properties:
+        protocol:
+          type: string
